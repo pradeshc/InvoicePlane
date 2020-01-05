@@ -120,7 +120,7 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="http://docs.invoiceplane.com/" target="_blank"
+                    <a href="<?php echo (is_array(@get_headers('https://docs.invoiceplane.com'))) ? 'http://docs.invoiceplane.com/' : 'http://docs.invoiceplane.org/'   ?>" target="_blank"
                        class="tip icon" title="<?php _trans('documentation'); ?>"
                        data-placement="bottom">
                         <i class="fa fa-question-circle"></i>

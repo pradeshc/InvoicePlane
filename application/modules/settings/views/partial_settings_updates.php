@@ -9,7 +9,11 @@
 
         // Get the latest version from the InvoicePlane IDS
         $.ajax({
+            <?php if (is_array(@get_headers('https://ids.invoiceplane.com'))) { ?>
             'url': 'https://ids.invoiceplane.com/updatecheck?cv=' + ip_version,
+            <?php } else { ?>
+            'url': 'https://ids.invoiceplane.org/updatecheck?cv=' + ip_version,
+            <?php } ?>
             'dataType': 'json',
             success: function(data) {
                 <?php echo(IP_DEBUG ? 'console.log(data);' : ''); ?>
@@ -37,7 +41,11 @@
 
         // Get the latest news
         $.ajax({
+            <?php if (is_array(@get_headers('https://ids.invoiceplane.com'))) { ?>
             'url': 'https://ids.invoiceplane.com/get_news',
+            <?php } else { ?>
+            'url': 'https://ids.invoiceplane.org/get_news',
+            <?php } ?>
             'dataType': 'json',
             'success': function(data) {
                 <?php echo(IP_DEBUG ? 'console.log(data);' : ''); ?>
@@ -89,7 +97,7 @@
                         <?php _trans('updatecheck_failed'); ?>
                     </div>
 
-                    <a href="https://invoiceplane.com/downloads" id="updatecheck-updates-available"
+                	<a href="<?php echo (is_array(@get_headers('invoiceplane.com'))) ? 'https://invoiceplane.com/downloads' : 'https://invoiceplane.org/downloads'   ?>" id="updatecheck-updates-available"
                         class="btn btn-success btn-sm hidden" target="_blank">
                         <?php _trans('updates_available'); ?>
                     </a>
